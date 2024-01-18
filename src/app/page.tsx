@@ -1,10 +1,12 @@
 import { LoginComponent } from '@/components/LoginComponent'
 
-export default function Home() {
+const Home = () => {
   return (
-    <main>
-      <h1>Cymba</h1>
+    <main className="flex flex-col justify-center items-center min-h-screen w-screen">
+      <h1 className='text-3xl font-bold tracking-wider mb-8'>Cymba</h1>
       <LoginComponent/>
     </main>
   )
 }
+
+export default Home;

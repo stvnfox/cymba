@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react"
+import { FunctionComponent, useMemo, useState } from "react"
 import { SpotifyUser } from "@/models/spotify.models"
 import { SpotifyService } from "@/services/spotify.service"
 import { useToken } from "@/hooks/useToken.hooks"
 
-export const UserComponent = () => {
+export const UserComponent: FunctionComponent = () => {
     const token = useToken()
     const [user, setUser] = useState<SpotifyUser | null>(null)
 

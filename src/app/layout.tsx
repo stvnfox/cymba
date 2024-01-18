@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import './globals.css'
 
+config.autoAddCss = false
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + ' container mx-auto text-white bg-neutral-800'}>
           {children}
       </body>
     </html>

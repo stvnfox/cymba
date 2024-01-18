@@ -8,7 +8,7 @@ import { TokenResponse } from "@/models/auth.models";
 import { SpotifyService } from "@/services/spotify.service";
 import { UserComponent } from "@/components/UserComponent";
 
-export default function Dashboard() {
+const Dashboard = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const didRunOnce = useRef(false)
@@ -56,3 +56,5 @@ export default function Dashboard() {
         </main>
     )
 }
+
+export default Dashboard;
