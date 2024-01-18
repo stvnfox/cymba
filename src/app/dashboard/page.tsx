@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useMemo, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { removeUserDataFromStorage } from "@/lib/auth";
 import { setStorageItem } from "@/lib/storage";
 import { TokenResponse } from "@/models/auth.models";
