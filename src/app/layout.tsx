@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className + ' container mx-auto text-white bg-neutral-800'}>
+      <body className={inter.className + ' text-white bg-neutral-800'}>
           {children}
       </body>
     </html>
