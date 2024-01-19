@@ -3,6 +3,7 @@
 import { FunctionComponent } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpotify } from "@fortawesome/free-brands-svg-icons"
+import { Button } from "@/components/ui/button"
 import { redirectToSpotifyAuth } from "../lib/auth"
 
 export const LoginComponent: FunctionComponent = () => {
@@ -12,16 +13,16 @@ export const LoginComponent: FunctionComponent = () => {
             <p className="mb-12 tracking-wide text-green-950 lg:w-5/6">
                 <b>Welcome back,</b> connect with your Spotify account to continue to Cymba.
             </p>
-            <button
-                className="flex items-center gap-3 rounded-lg bg-green-700 px-6 py-4 tracking-wide text-neutral-200 transition-colors hover:bg-green-800"
+            <Button
+                className="gap-3 bg-green-700 p-6 tracking-wide text-neutral-200 hover:bg-green-800"
                 onClick={redirectToSpotifyAuth}
             >
                 <FontAwesomeIcon
                     icon={faSpotify}
-                    className="h-8"
+                    className="h-6"
                 />
                 Login with Spotify
-            </button>
+            </Button>
         </div>
     )
 }
