@@ -2,22 +2,14 @@
 
 import { useMemo, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { removeUserDataFromStorage } from "@/lib/auth"
 import { setStorageItem } from "@/lib/storage"
 import { TokenResponse } from "@/models/auth.models"
 import { SpotifyService } from "@/services/spotify.service"
-import { UserComponent } from "@/components/UserComponent"
 
 const Dashboard = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const didRunOnce = useRef(false)
-
-    const logout = () => {
-        removeUserDataFromStorage()
-
-        router.push("/")
-    }
 
     useMemo(() => {
         if (didRunOnce.current === false) {
@@ -49,11 +41,9 @@ const Dashboard = () => {
     }, [])
 
     return (
-        <main>
+        <>
             <h1>Dashboard</h1>
-            <UserComponent />
-            <button onClick={logout}>Logout</button>
-        </main>
+        </>
     )
 }
 
