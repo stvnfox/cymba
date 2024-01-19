@@ -1,11 +1,11 @@
-import { LoginComponent } from '@/components/LoginComponent'
+import { LoginComponent } from "@/components/LoginComponent"
 
 const Home = () => {
-  return (
-    <main className="flex flex-col justify-center items-center min-h-screen w-screen">
-      <LoginComponent/>
-    </main>
-  )
+    return (
+        <main className="flex min-h-screen w-screen flex-col items-center justify-center">
+            <LoginComponent />
+        </main>
+    )
 }
 
-export default Home;
+export default Home

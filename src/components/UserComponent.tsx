@@ -10,10 +10,10 @@ export const UserComponent: FunctionComponent = () => {
     useMemo(() => {
         const setUserData = async () => {
             const response = await SpotifyService.GetUserData(token)
-    
+
             setUser(response)
         }
-    
+
         setUserData()
     }, [token])
 

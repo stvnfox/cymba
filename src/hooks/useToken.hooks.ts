@@ -1,5 +1,5 @@
-import { getStorageItem } from "@/lib/storage";
+import { getStorageItem } from "@/lib/storage"
 
 export const useToken = () => {
-    return getStorageItem('access_token');
+    return getStorageItem("access_token")
 }
