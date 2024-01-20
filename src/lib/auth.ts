@@ -51,4 +51,5 @@ export const removeUserDataFromStorage = () => {
     removeStorageItem("expires_in")
     removeStorageItem("expires")
     removeStorageItem("code_verifier")
+    removeStorageItem("user_id")
 }

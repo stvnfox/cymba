@@ -1,6 +1,6 @@
 "use client"
 
-import { SpotifyUser } from "@/models/spotify.models"
+import { getStorageItem } from "@/lib/storage"
 import { Dispatch, FunctionComponent, SetStateAction, createContext, useContext, useState } from "react"
 
 type DashboardProviderProps = {
@@ -10,15 +10,23 @@ type DashboardProviderProps = {
 type DashboardContextType = {
     token: string
     setToken: Dispatch<SetStateAction<string>>
-    user: SpotifyUser
-    setUser: Dispatch<SetStateAction<SpotifyUser>>
+    userId: string
+    setUserId: Dispatch<SetStateAction<string>>
+    refreshToken: string
+    setRefreshToken: Dispatch<SetStateAction<string>>
+    expires: string
+    setExpires: Dispatch<SetStateAction<string>>
 }
 
 const defaultDashboardContext = {
     token: "",
     setToken: () => {},
-    user: {} as SpotifyUser,
-    setUser: () => {},
+    userId: "",
+    setUserId: () => {},
+    refreshToken: "",
+    setRefreshToken: () => {},
+    expires: "",
+    setExpires: () => {},
 }
 
 const DashboardContext = createContext<DashboardContextType>(defaultDashboardContext)
@@ -34,8 +42,16 @@ export const useDashboardContext = () => {
 }
 
 export const DashboardProvider: FunctionComponent<DashboardProviderProps> = ({ children }) => {
-    const [token, setToken] = useState<string>("")
-    const [user, setUser] = useState<SpotifyUser>({} as SpotifyUser)
+    const [token, setToken] = useState(getStorageItem("access_token") ?? "")
+    const [userId, setUserId] = useState(getStorageItem("userId") ?? "")
+    const [refreshToken, setRefreshToken] = useState(getStorageItem("refresh_token") ?? "")
+    const [expires, setExpires] = useState(getStorageItem("expires") ?? "")
 
-    return <DashboardContext.Provider value={{ token, setToken, user, setUser }}>{children}</DashboardContext.Provider>
+    return (
+        <DashboardContext.Provider
+            value={{ token, setToken, userId, setUserId, refreshToken, setRefreshToken, expires, setExpires }}
+        >
+            {children}
+        </DashboardContext.Provider>
+    )
 }

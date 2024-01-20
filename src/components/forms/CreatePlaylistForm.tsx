@@ -2,7 +2,7 @@
 import { FunctionComponent, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import * as z from "zod"
 
 import { useDashboardContext } from "@/context/dashboard.context"
@@ -19,8 +19,9 @@ const CreatePlaylistFormSchema = z.object({
 })
 
 export const CreatePlaylistForm: FunctionComponent = () => {
-    const { token, user } = useDashboardContext()
+    const { token, userId } = useDashboardContext()
     const router = useRouter()
+    const pathName = usePathname()
     const [isLoading, setIsLoading] = useState(false)
     const [submitFailed, setSubmitFailed] = useState(false)
 
@@ -38,7 +39,7 @@ export const CreatePlaylistForm: FunctionComponent = () => {
 
         try {
             const response = await SpotifyService.CreatePlaylist({
-                userId: user.id,
+                userId: userId,
                 token,
                 name: values.title,
                 description: values.description,

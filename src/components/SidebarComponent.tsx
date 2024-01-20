@@ -9,13 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useDashboardContext } from "@/context/dashboard.context"
 import { navigationItems } from "@/lib/navigation"
 import { removeUserDataFromStorage } from "@/lib/auth"
-import { SpotifyUser } from "@/models/spotify.models"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { CreatePlaylistButton } from "@/components/CreatePlaylistButton"
+import { Separator } from "@/components/ui/separator"
 
 export const SidebarComponent: FunctionComponent = () => {
-    const { setUser, setToken } = useDashboardContext()
+    const { setExpires, setRefreshToken, setUserId, setToken } = useDashboardContext()
     const currentPath = usePathname()
     const router = useRouter()
     const isExpended = true
@@ -23,7 +22,9 @@ export const SidebarComponent: FunctionComponent = () => {
     const signOff = () => {
         removeUserDataFromStorage()
         setToken("")
-        setUser({} as SpotifyUser)
+        setUserId("")
+        setExpires("")
+        setRefreshToken("")
 
         router.push("/")
     }

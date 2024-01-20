@@ -11,16 +11,20 @@ const Dashboard = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const didRunOnce = useRef(false)
-    const { setToken, setUser } = useDashboardContext()
+    const { expires, setExpires, setRefreshToken, setToken, setUserId } = useDashboardContext()
 
     useMemo(() => {
         if (didRunOnce.current === false) {
             didRunOnce.current = true
 
-            const getUserData = async (token: string) => {
+            const getUserId = async (token: string) => {
                 const response = await SpotifyService.GetUserData(token)
 
-                setUser(response)
+                // Set user id in local storage
+                setStorageItem("userId", response.id)
+
+                // Set user id in context
+                setUserId(response)
             }
 
             const getAndSetTokenData = async () => {
@@ -31,7 +35,7 @@ const Dashboard = () => {
 
                     const { access_token, refresh_token, expires_in } = response
                     const now = new Date()
-                    const expires = new Date(now.getTime() + expires_in * 1000).toString()
+                    const expires = new Date(now.getTime() + expires_in * 1000).toISOString()
 
                     // Set token data in local storage
                     setStorageItem("access_token", access_token)
@@ -39,8 +43,11 @@ const Dashboard = () => {
                     setStorageItem("expires_in", expires_in.toString())
                     setStorageItem("expires", expires)
 
+                    // Set token data in context
                     setToken(access_token)
-                    getUserData(access_token)
+                    setRefreshToken(refresh_token)
+                    setExpires(expires)
+                    getUserId(access_token)
 
                     // Redirect to dashboard to remove code from url
                     router.push("/dashboard")
@@ -49,11 +56,12 @@ const Dashboard = () => {
 
             getAndSetTokenData()
         }
-    }, [router, searchParams, setToken, setUser])
+    }, [router, searchParams, setToken, setUserId, setRefreshToken, setExpires])
 
     return (
         <>
             <h1>Dashboard</h1>
+            {expires}
         </>
     )
 }
