@@ -2,16 +2,16 @@
 import { FunctionComponent, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import * as z from "zod"
 
 import { useDashboardContext } from "@/context/dashboard.context"
-import { SpotifyService } from "@/services/spotify.service"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Spinner } from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
+import { PlaylistsService } from "@/services/playlists.service"
 
 type CreatePlaylistFormProps = {
     children: React.ReactNode
@@ -42,7 +42,7 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
         setSubmitFailed(false)
 
         try {
-            const response = await SpotifyService.CreatePlaylist({
+            const response = await PlaylistsService.CreatePlaylist({
                 userId: userId,
                 token,
                 name: values.title,

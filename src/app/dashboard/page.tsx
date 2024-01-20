@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { setStorageItem } from "@/lib/storage"
 import { TokenResponse } from "@/models/auth.models"
-import { SpotifyService } from "@/services/spotify.service"
+import { AuthService } from "@/services/auth.service"
 import { useDashboardContext } from "@/context/dashboard.context"
 
 const Dashboard = () => {
@@ -18,7 +18,7 @@ const Dashboard = () => {
             didRunOnce.current = true
 
             const getUserId = async (token: string) => {
-                const response = await SpotifyService.GetUserData(token)
+                const response = await AuthService.GetUserData(token)
 
                 // Set user id in local storage
                 setStorageItem("userId", response.id)
@@ -31,7 +31,7 @@ const Dashboard = () => {
                 const code = searchParams.get("code")
 
                 if (code) {
-                    const response: TokenResponse = await SpotifyService.GetToken(code)
+                    const response: TokenResponse = await AuthService.GetToken(code)
 
                     const { access_token, refresh_token, expires_in } = response
                     const now = new Date()

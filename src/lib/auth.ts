@@ -1,7 +1,8 @@
 import { removeStorageItem, setStorageItem } from "./storage"
 
 const authorizationEndpoint: string = "https://accounts.spotify.com/authorize"
-const scope: string = "user-read-private user-read-email playlist-modify-public playlist-modify-private"
+const scope: string =
+    "user-read-private user-read-email playlist-modify-public playlist-modify-private playlist-read-private"
 
 const generateRandomString = () => {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
