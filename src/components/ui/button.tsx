@@ -13,6 +13,7 @@ const buttonVariants = cva(
                     "bg-neutral-900 text-neutral-50 hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90",
                 navigation:
                     "relative gap-3 text-sm font-light bg-transparent text-neutral-200 hover:bg-neutral-700 hover:text-neutral-50 dark:text-neutral-50 dark:hover:bg-neutral-800",
+                outline: "border border-neutral-600 text-neutral-200 hover:bg-neutral-700",
             },
             size: {
                 default: "h-10 px-4 py-2",

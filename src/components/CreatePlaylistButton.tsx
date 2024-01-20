@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogHeader,
@@ -43,7 +44,21 @@ export const CreatePlaylistButton: FunctionComponent<CreatePlaylistButtonProps> 
                         soundtrack on Spotify! 🎶✨
                     </DialogDescription>
                 </DialogHeader>
-                <CreatePlaylistForm />
+                <CreatePlaylistForm>
+                    <p className="mt-4 text-sm text-neutral-400">
+                        Success! Your playlist has been created. Add songs to your playlist by searching and adding in
+                        Cymba!
+                    </p>
+                    <DialogClose asChild>
+                        <Button
+                            variant="outline"
+                            type="button"
+                            className="!mt-3"
+                        >
+                            Close
+                        </Button>
+                    </DialogClose>
+                </CreatePlaylistForm>
             </DialogContent>
         </Dialog>
     )
