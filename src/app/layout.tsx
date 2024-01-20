@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { config } from "@fortawesome/fontawesome-svg-core"
+import { DashboardProvider } from "@/context/dashboard.context"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import "./globals.css"
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={inter.className + " bg-neutral-800 text-white"}>{children}</body>
+            <body className={inter.className + " bg-neutral-800 text-white"}>
+                <DashboardProvider>{children}</DashboardProvider>
+            </body>
         </html>
     )
 }

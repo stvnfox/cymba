@@ -1,26 +1,44 @@
-import { FunctionComponent, useMemo, useState } from "react"
-import { SpotifyUser } from "@/models/spotify.models"
-import { SpotifyService } from "@/services/spotify.service"
-import { useToken } from "@/hooks/useToken.hooks"
+import { FunctionComponent } from "react"
+import clsx from "clsx"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons"
+import { useRouter } from "next/navigation"
+import { useDashboardContext } from "@/context/dashboard.context"
+import { removeUserDataFromStorage } from "@/lib/auth"
+import { Button } from "@/components/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-export const UserComponent: FunctionComponent = () => {
-    const token = useToken()
-    const [user, setUser] = useState<SpotifyUser | null>(null)
+type UserComponentProps = {
+    isExpended: boolean
+}
 
-    useMemo(() => {
-        const setUserData = async () => {
-            const response = await SpotifyService.GetUserData(token)
+export const UserComponent: FunctionComponent<UserComponentProps> = ({ isExpended }) => {
+    const router = useRouter()
+    const { user } = useDashboardContext()
 
-            setUser(response)
-        }
+    const signOff = () => {
+        removeUserDataFromStorage()
 
-        setUserData()
-    }, [token])
+        router.push("/")
+    }
 
     return (
-        <div>
-            <h1>User Component</h1>
-            <p>{user?.display_name}</p>
-        </div>
+        <Popover>
+            <PopoverTrigger>{user?.display_name}</PopoverTrigger>
+            <PopoverContent>
+                <Button
+                    variant="navigation"
+                    size={isExpended ? "navigation" : "icon"}
+                    className={clsx(isExpended && "justify-start")}
+                    onClick={signOff}
+                >
+                    <FontAwesomeIcon
+                        icon={faArrowRightToBracket}
+                        className="!h-5"
+                    />
+                    {isExpended && "Sign out"}
+                </Button>
+            </PopoverContent>
+        </Popover>
     )
 }

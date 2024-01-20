@@ -4,19 +4,26 @@ import { FunctionComponent } from "react"
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { faArrowRightToBracket, faPause } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRightToBracket, faPause, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useDashboardContext } from "@/context/dashboard.context"
 import { navigationItems } from "@/lib/navigation"
 import { removeUserDataFromStorage } from "@/lib/auth"
-import { Button } from "./ui/button"
+import { SpotifyUser } from "@/models/spotify.models"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { CreatePlaylistButton } from "@/components/CreatePlaylistButton"
 
 export const SidebarComponent: FunctionComponent = () => {
+    const { setUser, setToken } = useDashboardContext()
     const currentPath = usePathname()
     const router = useRouter()
     const isExpended = true
 
     const signOff = () => {
         removeUserDataFromStorage()
+        setToken("")
+        setUser({} as SpotifyUser)
 
         router.push("/")
     }
@@ -30,7 +37,20 @@ export const SidebarComponent: FunctionComponent = () => {
                 />
                 Cymba
             </h2>
-            <nav className="flex-grow">
+            <CreatePlaylistButton isExpended={isExpended} />
+            <Button
+                variant="navigation"
+                size={isExpended ? "navigation" : "icon"}
+                className={clsx(isExpended && "justify-start")}
+            >
+                <FontAwesomeIcon
+                    icon={faSearch}
+                    className="!h-5"
+                />
+                {isExpended && "Search"}
+            </Button>
+            <Separator />
+            <nav className="w-full flex-grow">
                 <ul className="space-y-4">
                     {navigationItems.map((item, index) => {
                         return (
