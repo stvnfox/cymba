@@ -2,15 +2,16 @@
 import { FunctionComponent, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 import * as z from "zod"
 
 import { useDashboardContext } from "@/context/dashboard.context"
+import { SpotifyService } from "@/services/spotify.service"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Spinner } from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
-import { SpotifyService } from "@/services/spotify.service"
-import { useRouter } from "next/navigation"
 
 const CreatePlaylistFormSchema = z.object({
     title: z.string().min(2).max(50),
@@ -90,6 +91,7 @@ export const CreatePlaylistForm: FunctionComponent = () => {
                         disabled={isLoading}
                         aria-label="Click here to create your playlist"
                     >
+                        {isLoading && <Spinner />}
                         Submit
                     </Button>
                     {submitFailed && (
