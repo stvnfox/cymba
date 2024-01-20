@@ -11,7 +11,7 @@ type DashboardContextType = {
     token: string
     setToken: Dispatch<SetStateAction<string>>
     user: SpotifyUser
-    setUser: Dispatch<SetStateAction<SpotifyUser | null>>
+    setUser: Dispatch<SetStateAction<SpotifyUser>>
 }
 
 const defaultDashboardContext = {
@@ -35,7 +35,7 @@ export const useDashboardContext = () => {
 
 export const DashboardProvider: FunctionComponent<DashboardProviderProps> = ({ children }) => {
     const [token, setToken] = useState<string>("")
-    const [user, setUser] = useState<SpotifyUser | null>(null)
+    const [user, setUser] = useState<SpotifyUser>({} as SpotifyUser)
 
     return <DashboardContext.Provider value={{ token, setToken, user, setUser }}>{children}</DashboardContext.Provider>
 }
