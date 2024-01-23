@@ -1,6 +1,6 @@
 "use client"
 
-import { getStorageItem } from "@/lib/storage"
+// import { getStorageItem } from "@/lib/storage"
 import { Dispatch, FunctionComponent, SetStateAction, createContext, useContext, useState } from "react"
 
 type DashboardProviderProps = {
@@ -42,10 +42,10 @@ export const useDashboardContext = () => {
 }
 
 export const DashboardProvider: FunctionComponent<DashboardProviderProps> = ({ children }) => {
-    const [token, setToken] = useState(getStorageItem("access_token") ?? "")
-    const [userId, setUserId] = useState(getStorageItem("userId") ?? "")
-    const [refreshToken, setRefreshToken] = useState(getStorageItem("refresh_token") ?? "")
-    const [expires, setExpires] = useState(getStorageItem("expires") ?? "")
+    const [token, setToken] = useState("")
+    const [userId, setUserId] = useState("")
+    const [refreshToken, setRefreshToken] = useState("")
+    const [expires, setExpires] = useState("")
 
     return (
         <DashboardContext.Provider
