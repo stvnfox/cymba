@@ -3,9 +3,9 @@ import { FunctionComponent, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 import * as z from "zod"
 
-import { useDashboardContext } from "@/context/dashboard.context"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -23,7 +23,7 @@ const CreatePlaylistFormSchema = z.object({
 })
 
 export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({ children }) => {
-    const { token, userId } = useDashboardContext()
+    const session = useSession()
     const [submitted, setSubmitted] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [submitFailed, setSubmitFailed] = useState(false)
@@ -43,8 +43,8 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
 
         try {
             const response = await PlaylistsService.CreatePlaylist({
-                userId: userId,
-                token,
+                userId: session.data?.user?.id as string,
+                token: session.data?.accessToken,
                 name: values.title,
                 description: values.description,
             })

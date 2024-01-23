@@ -43,6 +43,17 @@ export const PlaylistsService = {
             body: JSON.stringify({ name: params.name, description: params.description }),
         })
 
-        return await response.json()
+        switch (response.status) {
+            case 201:
+                return await response.json()
+            case 401:
+                throw new Error("Bad or expired token")
+            case 403:
+                throw new Error("User does not have permission to create playlist")
+            case 429:
+                throw new Error("Too many requests")
+            default:
+                throw new Error("Unknown error")
+        }
     },
 }

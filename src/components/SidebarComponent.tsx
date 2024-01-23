@@ -3,31 +3,19 @@
 import { FunctionComponent } from "react"
 import clsx from "clsx"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
+import { signOut } from "next-auth/react"
 import { faArrowRightToBracket, faPause, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useDashboardContext } from "@/context/dashboard.context"
+import { DEFAULT_LOGOUT_REDIRECT } from "@/routes"
 import { navigationItems } from "@/lib/navigation"
-import { removeUserDataFromStorage } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 import { CreatePlaylistButton } from "@/components/CreatePlaylistButton"
 import { Separator } from "@/components/ui/separator"
 
 export const SidebarComponent: FunctionComponent = () => {
-    const { setExpires, setRefreshToken, setUserId, setToken } = useDashboardContext()
     const currentPath = usePathname()
-    const router = useRouter()
     const isExpended = true
-
-    const signOff = () => {
-        removeUserDataFromStorage()
-        setToken("")
-        setUserId("")
-        setExpires("")
-        setRefreshToken("")
-
-        router.push("/")
-    }
 
     return (
         <aside className="flex min-h-screen flex-col items-center border-r border-neutral-600 p-6">
@@ -87,7 +75,7 @@ export const SidebarComponent: FunctionComponent = () => {
                 variant="navigation"
                 size={isExpended ? "navigation" : "icon"}
                 className={clsx(isExpended && "justify-start")}
-                onClick={signOff}
+                onClick={() => signOut({ callbackUrl: DEFAULT_LOGOUT_REDIRECT })}
             >
                 <FontAwesomeIcon
                     icon={faArrowRightToBracket}

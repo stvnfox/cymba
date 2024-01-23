@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import { SessionProvider } from "next-auth/react"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import { DashboardProvider } from "@/context/dashboard.context"
 
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body className={inter.className + " bg-neutral-800 text-white"}>
-                <DashboardProvider>{children}</DashboardProvider>
+                <SessionProvider>{children}</SessionProvider>
             </body>
         </html>
     )
