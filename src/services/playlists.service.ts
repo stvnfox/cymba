@@ -9,7 +9,7 @@ import {
 const usersPlaylistsEndpoint: string = "https://api.spotify.com/v1/users/"
 
 interface CreatePlaylistParams {
-    token: string | null
+    token: string | undefined
     userId: string | undefined
     name: string
     description: string

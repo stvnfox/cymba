@@ -23,7 +23,7 @@ const CreatePlaylistFormSchema = z.object({
 })
 
 export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({ children }) => {
-    const session = useSession()
+    const { data } = useSession()
     const [submitted, setSubmitted] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [submitFailed, setSubmitFailed] = useState(false)
@@ -43,8 +43,8 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
 
         try {
             const response = await PlaylistsService.CreatePlaylist({
-                userId: session.data?.user?.id as string,
-                token: session.data?.accessToken,
+                userId: data?.user.id,
+                token: data?.user.access_token,
                 name: values.title,
                 description: values.description,
             })
