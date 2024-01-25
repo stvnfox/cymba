@@ -17,7 +17,11 @@ const refreshAccessToken = async (token: JWT) => {
 
         const tokens = await response.json()
 
-        if (!response.ok) throw tokens
+        if (!response.ok) {
+            console.error("Error refreshing access token", "doe iets")
+            // The error property will be used client-side to handle the refresh token error
+            return { ...token, error: "RefreshAccessTokenError" as const }
+        }
 
         return {
             ...token,
@@ -64,6 +68,7 @@ export const {
                         id: token.username,
                         access_token: token.access_token,
                         refresh_token: token.refresh_token,
+                        error: token.error,
                     },
                 }
             }
