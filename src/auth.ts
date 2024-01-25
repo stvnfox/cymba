@@ -12,6 +12,7 @@ const refreshAccessToken = async (token: JWT) => {
                 refresh_token: token.refresh_token as string,
                 client_id: process.env.SPOTIFY_CLIENT_ID as string,
             }),
+            cache: "no-cache",
         })
 
         const tokens = await response.json()
