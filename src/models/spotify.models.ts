@@ -160,3 +160,24 @@ export interface SpotifyPlaylistTrack {
     type: string
     uri: string
 }
+
+interface SimplifiedPlaylistTracks {
+    href: string
+    total: number
+}
+
+export interface SimplifiedSpotifyPlaylist {
+    collaborative: boolean
+    description: string
+    external_urls: SpotifyExternalUrls
+    href: string
+    id: string
+    images: SpotifyImage[]
+    name: string
+    owner: SpotifyPlaylistOwner
+    public: boolean
+    snapshot_id: string
+    tracks: SimplifiedPlaylistTracks
+    type: string
+    uri: string
+}
