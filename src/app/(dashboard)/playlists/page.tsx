@@ -1,9 +1,9 @@
 "use client"
 
 import { useSession } from "next-auth/react"
+import { useQuery } from "@tanstack/react-query"
 import { PlaylistsService } from "@/services/playlists.service"
 import { PlaylistsOverview } from "./_components/PlaylistsOverview"
-import { useQuery } from "@tanstack/react-query"
 import { Spinner } from "@/components/ui/spinner"
 
 const Playlists = () => {
