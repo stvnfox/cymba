@@ -13,8 +13,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const { data } = useSession()
 
     useEffect(() => {
-        redirectToSpotifyLogin(data?.user.error)
-    }, [data])
+        if (data?.user.error) {
+            redirectToSpotifyLogin(data.user.error)
+        }
+    }, [data?.user.error])
 
     return (
         <main className="flex gap-4">

@@ -7,28 +7,31 @@ import { PlaylistsOverview } from "./_components/PlaylistsOverview"
 import { Spinner } from "@/components/ui/spinner"
 
 const Playlists = () => {
-    const session = useSession()
+    const { data: session } = useSession()
 
     const getAllPlaylists = async () => {
         const { items } = await PlaylistsService.GetAllPlaylists({
             limit: 10,
             offset: 0,
-            token: session.data?.user.access_token,
+            token: session?.user.access_token,
         })
 
-        if (items) return items
+        if (!items) return []
 
-        return []
+        return items
     }
+
     const { data: playlists, isLoading } = useQuery({
         queryFn: () => getAllPlaylists(),
         queryKey: ["playlists"],
+        enabled: !!session?.user.access_token,
     })
 
     return (
         <>
             <h1>Playlists</h1>
             {isLoading && <Spinner />}
+            {/* TODO: Add error state + pagination */}
             {playlists && <PlaylistsOverview items={playlists} />}
         </>
     )
