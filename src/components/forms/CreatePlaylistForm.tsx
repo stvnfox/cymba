@@ -1,9 +1,10 @@
 "use client"
-import { FunctionComponent, useState } from "react"
+import { FunctionComponent } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { useMutation } from "@tanstack/react-query"
 import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -24,9 +25,6 @@ const CreatePlaylistFormSchema = z.object({
 
 export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({ children }) => {
     const { data } = useSession()
-    const [submitted, setSubmitted] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const [submitFailed, setSubmitFailed] = useState(false)
     const router = useRouter()
 
     const form = useForm<z.infer<typeof CreatePlaylistFormSchema>>({
@@ -37,11 +35,8 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
         },
     })
 
-    const onSubmit = async (values: z.infer<typeof CreatePlaylistFormSchema>) => {
-        setIsLoading(true)
-        setSubmitFailed(false)
-
-        try {
+    const createPlaylist = useMutation({
+        mutationFn: async (values: z.infer<typeof CreatePlaylistFormSchema>) => {
             const response = await PlaylistsService.CreatePlaylist({
                 userId: data?.user.id,
                 token: data?.user.access_token,
@@ -49,17 +44,14 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
                 description: values.description,
             })
 
-            router.push(`/playlists/${response.id}`)
+            if (response.id) {
+                router.push(`/playlists/${response.id}`)
+            }
+        },
+    })
 
-            setTimeout(() => {
-                setSubmitted(true)
-            }, 500)
-        } catch (error) {
-            setSubmitFailed(true)
-            console.error(error)
-        }
-
-        setIsLoading(false)
+    const onSubmit = (values: z.infer<typeof CreatePlaylistFormSchema>) => {
+        createPlaylist.mutate(values)
     }
 
     return (
@@ -70,7 +62,7 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
                     className="space-y-8"
                 >
                     <>
-                        {submitted ? (
+                        {createPlaylist.isSuccess ? (
                             [children]
                         ) : (
                             <>
@@ -102,16 +94,16 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
                                 />
                                 <Button
                                     type="submit"
-                                    disabled={isLoading}
+                                    disabled={createPlaylist.isPending}
                                     aria-label="Click here to create your playlist"
                                 >
-                                    {isLoading && <Spinner />}
+                                    {createPlaylist.isPending && <Spinner />}
                                     Submit
                                 </Button>
                             </>
                         )}
                     </>
-                    {submitFailed && (
+                    {createPlaylist.isError && (
                         <FormMessage className="!mt-3">
                             Oops! Something went wrong while creating your playlist. Please try again later.
                         </FormMessage>

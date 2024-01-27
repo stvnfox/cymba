@@ -1,32 +1,34 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
-import { SimplifiedSpotifyPlaylist } from "@/models/spotify.models"
 import { PlaylistsService } from "@/services/playlists.service"
 import { PlaylistsOverview } from "./_components/PlaylistsOverview"
+import { useQuery } from "@tanstack/react-query"
+import { Spinner } from "@/components/ui/spinner"
 
 const Playlists = () => {
-    const { data } = useSession()
-    const [playlists, setPlaylists] = useState<SimplifiedSpotifyPlaylist[] | null>(null)
+    const session = useSession()
 
-    useEffect(() => {
-        const getPlaylists = async () => {
-            const response = await PlaylistsService.GetAllPlaylists({
-                limit: 10,
-                offset: 0,
-                token: data?.user.access_token,
-            })
+    const getAllPlaylists = async () => {
+        const { items } = await PlaylistsService.GetAllPlaylists({
+            limit: 10,
+            offset: 0,
+            token: session.data?.user.access_token,
+        })
 
-            setPlaylists(response.items)
-        }
+        if (items) return items
 
-        getPlaylists()
-    }, [data?.user.access_token])
+        return []
+    }
+    const { data: playlists, isLoading } = useQuery({
+        queryFn: () => getAllPlaylists(),
+        queryKey: ["playlists"],
+    })
 
     return (
         <>
             <h1>Playlists</h1>
+            {isLoading && <Spinner />}
             {playlists && <PlaylistsOverview items={playlists} />}
         </>
     )
