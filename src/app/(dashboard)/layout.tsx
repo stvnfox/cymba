@@ -19,10 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     }, [data?.user.error])
 
     return (
-        <main className="flex gap-4">
+        <main>
             <QueryClientProvider client={queryProvider}>
                 <SidebarComponent />
-                <section className="w-4/5">{children}</section>
+                <section className="ml-auto w-[calc(100vw-226px)] p-6">{children}</section>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </main>

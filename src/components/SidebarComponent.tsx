@@ -18,7 +18,7 @@ export const SidebarComponent: FunctionComponent = () => {
     const isExpended = true
 
     return (
-        <aside className="flex min-h-screen flex-col items-center border-r border-neutral-600 p-6">
+        <aside className="fixed flex h-screen w-[226px] flex-col items-center border-r border-neutral-600 p-6">
             <h2 className="mb-12 flex items-center gap-3 text-2xl tracking-wide text-neutral-300">
                 <FontAwesomeIcon
                     icon={faPause}

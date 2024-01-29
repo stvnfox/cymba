@@ -60,7 +60,9 @@ const createResponse = async (response: Response) => {
         case 400:
             throw new Error("Bad request")
         case 401:
-            throw new Error("Bad or expired token")
+            // Redirect to dashboard to start token refresh flow
+            window.location.href = "/dashboard"
+            break
         case 403:
             throw new Error("User does not have permission to create playlist")
         case 429:

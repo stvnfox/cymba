@@ -1,39 +1,48 @@
 "use client"
 
+import { useState } from "react"
 import { useSession } from "next-auth/react"
-import { useQuery } from "@tanstack/react-query"
-import { PlaylistsService } from "@/services/playlists.service"
+import { usePlaylists } from "@/hooks/playlists.hook"
+import { Button } from "@/components/ui/button"
 import { PlaylistsOverview } from "./_components/PlaylistsOverview"
 import { Spinner } from "@/components/ui/spinner"
 
 const Playlists = () => {
     const { data: session } = useSession()
+    const { hasNextPage, fetchNextPage, isLoading, isError, playlists } = usePlaylists(session?.user.access_token)
+    const [loading, setLoading] = useState(false)
 
-    const getAllPlaylists = async () => {
-        const { items } = await PlaylistsService.GetAllPlaylists({
-            limit: 10,
-            offset: 0,
-            token: session?.user.access_token,
-        })
+    const getNextResults = async () => {
+        setLoading(true)
 
-        if (!items) return []
+        await fetchNextPage()
 
-        return items
+        setLoading(false)
     }
 
-    const { data: playlists, isLoading } = useQuery({
-        queryFn: () => getAllPlaylists(),
-        queryKey: ["playlists"],
-        enabled: !!session?.user.access_token,
-    })
-
     return (
-        <>
-            <h1>Playlists</h1>
-            {isLoading && <Spinner />}
-            {/* TODO: Add error state + pagination */}
-            {playlists && <PlaylistsOverview items={playlists} />}
-        </>
+        <div>
+            <h1 className="mb-6 mt-1 text-2xl font-normal text-neutral-300">Playlists</h1>
+            {isLoading && (
+                <div className="mt-16 flex items-center justify-center">
+                    <Spinner />
+                </div>
+            )}
+            {isError && <div>error</div>}
+            {playlists && (
+                <PlaylistsOverview items={playlists}>
+                    {hasNextPage && (
+                        <Button
+                            variant="navigation"
+                            disabled={loading}
+                            onClick={getNextResults}
+                        >
+                            Load more
+                        </Button>
+                    )}
+                </PlaylistsOverview>
+            )}
+        </div>
     )
 }
 
