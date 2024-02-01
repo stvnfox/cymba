@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useSession } from "next-auth/react"
 import { usePlaylists } from "@/hooks/playlists.hook"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,11 @@ import { Spinner } from "@/components/ui/spinner"
 
 const Playlists = () => {
     const { data: session } = useSession()
-    const { hasNextPage, fetchNextPage, isLoading, isError, playlists } = usePlaylists(session?.user.access_token)
+    const playlistSection = useRef<HTMLDivElement | null>(null)
+    const { hasNextPage, fetchNextPage, isLoading, isError, playlists } = usePlaylists(
+        session?.user.access_token,
+        playlistSection.current
+    )
     const [loading, setLoading] = useState(false)
 
     const getNextResults = async () => {
@@ -21,7 +25,7 @@ const Playlists = () => {
     }
 
     return (
-        <div>
+        <div ref={playlistSection}>
             <h1 className="mb-6 mt-1 text-2xl font-normal text-neutral-300">Playlists</h1>
             {isLoading && (
                 <div className="mt-16 flex items-center justify-center">

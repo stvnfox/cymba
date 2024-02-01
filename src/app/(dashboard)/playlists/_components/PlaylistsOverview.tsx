@@ -21,7 +21,7 @@ export const PlaylistsOverview: FunctionComponent<PlaylistsOverviewProps> = ({ i
             )}
             {items && (
                 <>
-                    <ul className="grid-cols-auto-fit grid gap-4">
+                    <ul className="grid grid-cols-auto-fit gap-4">
                         {items.map((item) => {
                             return (
                                 <li
