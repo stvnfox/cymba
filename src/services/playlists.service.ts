@@ -1,11 +1,12 @@
+import { createResponse } from "@/lib/utils"
 import {
-    SimplifiedSpotifyPlaylist,
     SpotifyExternalUrls,
     SpotifyFollowers,
     SpotifyImage,
+    SpotifyPlaylist,
     SpotifyPlaylistOwner,
-    SpotifyPlaylistTrack,
-} from "@/models/spotify.models"
+} from "@/models/spotify.base.models"
+import { SpotifyPlaylistTrack } from "@/models/spotify.playlist.models"
 
 const usersEndpoint: string = "https://api.spotify.com/v1/users/"
 const playlistsEndpoint: string = "https://api.spotify.com/v1/me/playlists"
@@ -48,28 +49,7 @@ interface GetAllPlaylistsResponse {
     offset: number
     previous: string | null
     total: number
-    items: SimplifiedSpotifyPlaylist[]
-}
-
-const createResponse = async (response: Response) => {
-    switch (response.status) {
-        case 200:
-            return await response.json()
-        case 201:
-            return await response.json()
-        case 400:
-            throw new Error("Bad request")
-        case 401:
-            // Redirect to dashboard to start token refresh flow
-            window.location.href = "/dashboard"
-            break
-        case 403:
-            throw new Error("User does not have permission to create playlist")
-        case 429:
-            throw new Error("Too many requests")
-        default:
-            throw new Error("Unknown error")
-    }
+    items: SpotifyPlaylist[]
 }
 
 export const PlaylistsService = {

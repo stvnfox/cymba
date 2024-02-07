@@ -1,11 +1,11 @@
-import { SimplifiedSpotifyPlaylist } from "@/models/spotify.models"
 import { FunctionComponent } from "react"
+import { SpotifyPlaylist } from "@/models/spotify.base.models"
 import { PlaylistOverviewItem } from "./PlaylistOverviewItem"
 import { MessageComponent } from "@/components/MessageComponent"
 import { CreatePlaylistButton } from "@/components/CreatePlaylistButton"
 
 type PlaylistsOverviewProps = {
-    items: SimplifiedSpotifyPlaylist[]
+    items: SpotifyPlaylist[]
     children: React.ReactNode
 }
 

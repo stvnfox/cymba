@@ -1,12 +1,13 @@
 import { FunctionComponent } from "react"
 import Image from "next/image"
-import { clsx } from "clsx"
-import { SimplifiedSpotifyPlaylist } from "@/models/spotify.models"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import { clsx } from "clsx"
+
+import { SpotifyPlaylist } from "@/models/spotify.base.models"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 type PlaylistOverviewItemProps = {
-    item: SimplifiedSpotifyPlaylist
+    item: SpotifyPlaylist
 }
 
 export const PlaylistOverviewItem: FunctionComponent<PlaylistOverviewItemProps> = ({ item }) => {
