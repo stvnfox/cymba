@@ -5,12 +5,13 @@ import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { faArrowRightToBracket, faPause, faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRightToBracket, faPause } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DEFAULT_LOGOUT_REDIRECT } from "@/routes"
 import { navigationItems } from "@/lib/navigation"
 import { Button } from "@/components/ui/button"
 import { CreatePlaylistButton } from "@/components/CreatePlaylistButton"
+import { OpenSearchButton } from "@/components/OpenSearchButton"
 import { Separator } from "@/components/ui/separator"
 
 export const SidebarComponent: FunctionComponent = () => {
@@ -27,17 +28,7 @@ export const SidebarComponent: FunctionComponent = () => {
                 Cymba
             </h2>
             <CreatePlaylistButton isExpended={isExpended} />
-            <Button
-                variant="navigation"
-                size={isExpended ? "navigation" : "icon"}
-                className={clsx(isExpended && "justify-start")}
-            >
-                <FontAwesomeIcon
-                    icon={faSearch}
-                    className="!h-5"
-                />
-                {isExpended && "Search"}
-            </Button>
+            <OpenSearchButton isExpended={isExpended} />
             <Separator />
             <nav className="w-full flex-grow">
                 <ul className="space-y-4">
