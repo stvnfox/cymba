@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react"
 import { useSession } from "next-auth/react"
-import { usePlaylists } from "@/hooks/playlists.hook"
+import { usePlaylistsForPage } from "@/hooks/playlists.hook"
 import { Button } from "@/components/ui/button"
 import { PlaylistsOverview } from "./_components/PlaylistsOverview"
 import { Spinner } from "@/components/ui/spinner"
@@ -10,7 +10,7 @@ import { Spinner } from "@/components/ui/spinner"
 const Playlists = () => {
     const { data: session } = useSession()
     const playlistSection = useRef<HTMLDivElement | null>(null)
-    const { hasNextPage, fetchNextPage, isLoading, isError, playlists } = usePlaylists(
+    const { hasNextPage, fetchNextPage, isLoading, isError, playlists } = usePlaylistsForPage(
         session?.user.access_token,
         playlistSection.current
     )

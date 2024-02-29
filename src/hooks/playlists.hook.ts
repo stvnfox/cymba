@@ -10,7 +10,7 @@ const getPerPage = (width: number) => {
     return Math.floor(perRow) * 3
 }
 
-const getAllPlaylists = async (page: number, token: string) => {
+const getPlaylists = async (page: number, token: string) => {
     const { items, total } = await PlaylistsService.GetAllPlaylists({
         limit: perPage,
         offset: perPage * page,
@@ -24,16 +24,39 @@ const getAllPlaylists = async (page: number, token: string) => {
     return items
 }
 
-export const usePlaylists = (token: string | undefined, element: HTMLElement | null) => {
+export const usePlaylistsForPage = (token: string | undefined, element: HTMLElement | null) => {
     if (element) perPage = getPerPage(element.offsetWidth)
 
     const { data, hasNextPage, fetchNextPage, isLoading, isError } = useInfiniteQuery({
-        queryKey: ["playlists"],
-        queryFn: ({ pageParam = 0 }) => getAllPlaylists(pageParam, token as string),
+        queryKey: ["pagePlaylists"],
+        queryFn: ({ pageParam = 0 }) => getPlaylists(pageParam, token as string),
         initialPageParam: 0,
         enabled: !!token,
         getNextPageParam: (lastPage, allPages) => {
-            return totalResults > lastPage.length * allPages.length ? allPages.length : null
+            return totalResults > allPages.length * perPage ? allPages.length : null
+        },
+    })
+
+    const playlists = data?.pages?.flat() ?? []
+
+    return {
+        data,
+        hasNextPage,
+        fetchNextPage,
+        isLoading,
+        isError,
+        playlists,
+    }
+}
+
+export const usePlaylistsForAdding = (token: string | undefined) => {
+    const { data, hasNextPage, fetchNextPage, isLoading, isError } = useInfiniteQuery({
+        queryKey: ["playlists"],
+        queryFn: ({ pageParam = 0 }) => getPlaylists(pageParam, token as string),
+        initialPageParam: 0,
+        enabled: !!token,
+        getNextPageParam: (lastPage, allPages) => {
+            return totalResults > allPages.length * perPage ? allPages.length : null
         },
     })
 

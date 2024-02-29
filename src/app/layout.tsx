@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { SessionProvider } from "next-auth/react"
+import { Toaster } from "@/components/ui/toaster"
 import { config } from "@fortawesome/fontawesome-svg-core"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
@@ -19,7 +20,10 @@ export default function SignInRootLayout({ children }: { children: React.ReactNo
     return (
         <html lang="en">
             <body className={inter.className + " bg-neutral-800 text-white"}>
-                <SessionProvider>{children}</SessionProvider>
+                <SessionProvider>
+                    {children}
+                    <Toaster />
+                </SessionProvider>
             </body>
         </html>
     )

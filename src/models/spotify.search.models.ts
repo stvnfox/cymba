@@ -4,43 +4,35 @@ import {
     SpotifyAudiobook,
     SpotifyEpisode,
     SpotifyPlaylist,
+    SpotifyResponseBase,
     SpotifyShow,
     SpotifyTrack,
 } from "./spotify.base.models"
 
-interface SpotifySearchResponseBase {
-    href: string
-    limit: number
-    next: string | null
-    offset: number
-    previous: string | null
-    total: number
-}
-
-export interface SpotifyAudiobooks extends SpotifySearchResponseBase {
+export interface SpotifyAudiobooks extends SpotifyResponseBase {
     items: SpotifyAudiobook[]
 }
 
-export interface SpotifyEpisodes extends SpotifySearchResponseBase {
+export interface SpotifyEpisodes extends SpotifyResponseBase {
     items: SpotifyEpisode[]
 }
 
-export interface SpotifyShows extends SpotifySearchResponseBase {
+export interface SpotifyShows extends SpotifyResponseBase {
     items: SpotifyShow[]
 }
 
-export interface SpotifyPlaylists extends SpotifySearchResponseBase {
+export interface SpotifyPlaylists extends SpotifyResponseBase {
     items: SpotifyPlaylist[]
 }
 
-export interface SpotifyAlbums extends SpotifySearchResponseBase {
+export interface SpotifyAlbums extends SpotifyResponseBase {
     items: SpotifyAlbum[]
 }
 
-export interface SpotifyArtists extends SpotifySearchResponseBase {
+export interface SpotifyArtists extends SpotifyResponseBase {
     items: SpotifyArtist[]
 }
 
-export interface SpotifyTracks extends SpotifySearchResponseBase {
+export interface SpotifyTracks extends SpotifyResponseBase {
     items: SpotifyTrack[]
 }

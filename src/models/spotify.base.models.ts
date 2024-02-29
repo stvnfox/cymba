@@ -23,6 +23,15 @@ export interface SpotifyCopyright {
     type: string
 }
 
+export interface SpotifyResponseBase {
+    href: string
+    limit: number
+    next: string | null
+    offset: number
+    previous: string | null
+    total: number
+}
+
 // Spotify audiobook base models
 interface SpotifyAuthor {
     name: string

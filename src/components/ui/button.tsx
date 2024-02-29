@@ -14,6 +14,7 @@ const buttonVariants = cva(
                 navigation:
                     "relative gap-3 text-sm font-light bg-transparent text-neutral-200 hover:bg-neutral-700 hover:text-neutral-50 dark:text-neutral-50 dark:hover:bg-neutral-800",
                 outline: "border border-neutral-600 text-neutral-200 hover:bg-neutral-700",
+                ghost: "group flex items-center gap-3 rounded-md text-left text-sm text-neutral-200 transition-colors duration-200 ease-in-out hover:bg-neutral-600 focus:bg-neutral-700 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none active:bg-transparent",
             },
             size: {
                 default: "h-10 px-4 py-2",
@@ -21,6 +22,7 @@ const buttonVariants = cva(
                 lg: "h-11 rounded-md px-8",
                 navigation: "h-12 w-full text-left px-6",
                 icon: "h-12 w-12",
+                ghost: "h-fit w-[101%] -ml-1.5 -mr-3 py-1.5 pl-1.5",
             },
         },
         defaultVariants: {
