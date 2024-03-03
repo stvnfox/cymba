@@ -6,11 +6,11 @@ import {
     SpotifyPlaylist,
     SpotifyPlaylistOwner,
 } from "@/models/spotify.base.models"
-import { SpotifyPlaylistTrack } from "@/models/spotify.playlist.models"
+import { SpotifyPlaylistTracks } from "@/models/spotify.playlist.models"
 
 const usersEndpoint: string = "https://api.spotify.com/v1/users/"
-const playlistsEndpoint: string = "https://api.spotify.com/v1/me/playlists"
-const addEndpoint: string = "https://api.spotify.com/v1/playlists/"
+const userPlaylistsEndpoint: string = "https://api.spotify.com/v1/me/playlists"
+const playlistsEndpoint: string = "https://api.spotify.com/v1/playlists/"
 
 interface CreatePlaylistParams {
     token: string | undefined
@@ -19,7 +19,7 @@ interface CreatePlaylistParams {
     description: string
 }
 
-interface CreatePlaylistResponse {
+export interface PlaylistResponse {
     collaborative: boolean
     description: string | null
     external_urls: SpotifyExternalUrls
@@ -32,7 +32,7 @@ interface CreatePlaylistResponse {
     primary_color: string | null
     public: boolean
     snapshot_id: string
-    tracks: SpotifyPlaylistTrack
+    tracks: SpotifyPlaylistTracks
     type: string
     uri: string
 }
@@ -63,8 +63,13 @@ interface AddToPlaylistResponse {
     snapshot_id: string
 }
 
+export interface GetPlaylistByIdParams {
+    id: string
+    token: string | undefined
+}
+
 export const PlaylistsService = {
-    CreatePlaylist: async (params: CreatePlaylistParams): Promise<CreatePlaylistResponse> => {
+    CreatePlaylist: async (params: CreatePlaylistParams): Promise<PlaylistResponse> => {
         const endpoint = usersEndpoint + params.userId + "/playlists"
 
         const response = await fetch(endpoint, {
@@ -76,7 +81,7 @@ export const PlaylistsService = {
         return createResponse(response)
     },
     GetAllPlaylists: async (params: GetAllPlaylistsParams): Promise<GetAllPlaylistsResponse> => {
-        const url = `${playlistsEndpoint}?limit=${params.limit}&offset=${params.offset}`
+        const url = `${userPlaylistsEndpoint}?limit=${params.limit}&offset=${params.offset}`
 
         if (params.token) {
             const response = await fetch(url, {
@@ -89,8 +94,22 @@ export const PlaylistsService = {
 
         return {} as GetAllPlaylistsResponse
     },
+    GetPlaylistById: async (params: GetPlaylistByIdParams): Promise<PlaylistResponse> => {
+        const url = playlistsEndpoint + params.id
+
+        if (params.token) {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: { Authorization: "Bearer " + params.token },
+            })
+
+            return createResponse(response)
+        }
+
+        return {} as PlaylistResponse
+    },
     AddToPlaylist: async (params: AddToPlaylistParams): Promise<AddToPlaylistResponse> => {
-        const url = addEndpoint + params.id + "/tracks"
+        const url = playlistsEndpoint + params.id + "/tracks"
 
         if (params.token) {
             const response = await fetch(url, {

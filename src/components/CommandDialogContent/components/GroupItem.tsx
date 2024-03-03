@@ -95,7 +95,7 @@ export const GroupItem: FunctionComponent<GroupItemProps> = ({ item }) => {
                             className="object-cover"
                             role="presentation"
                         />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarFallback>{item.name}</AvatarFallback>
                     </Avatar>
                     <span className="flex-grow">{item.name}</span>
                     <MoreVertical className="text-neutral-400 transition-colors duration-200 ease-in-out group-hover:text-neutral-200" />

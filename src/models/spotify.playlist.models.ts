@@ -30,3 +30,15 @@ export interface SpotifyPlaylistTrack {
     type: string
     uri: string
 }
+
+export interface SpotifyPlaylistTracks {
+    href: string
+    limit: number
+    next: string | null
+    offset: number
+    previous: string | null
+    total: number
+    items: SpotifyPlaylistTrack[]
+    type: string
+    uri: string
+}
