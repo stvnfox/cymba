@@ -92,6 +92,7 @@ export const GroupItem: FunctionComponent<GroupItemProps> = ({ item }) => {
                         <AvatarImage
                             src={imageUrl}
                             alt=""
+                            className="object-cover"
                             role="presentation"
                         />
                         <AvatarFallback>CN</AvatarFallback>
