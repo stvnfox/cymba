@@ -7,29 +7,29 @@ Cymba is a streamlined application designed to empower music enthusiasts to crea
 **Key Features:**
 
 1. **Create Playlists:**
-   - Easily create new playlists tailored to your mood, occasion, or musical preferences.
-   - Add a personalized title and description to make each playlist unique.
+    - Easily create new playlists tailored to your mood, occasion, or musical preferences.
+    - Add a personalized title and description to make each playlist unique.
 2. **Edit Existing Playlists:**
-   - Fine-tune your playlists by adding or removing tracks with a simple drag-and-drop interface.
-   - Edit playlist details such as title, description, and cover art for a personalized touch.
+    - Fine-tune your playlists by adding or removing tracks with a simple drag-and-drop interface.
+    - Edit playlist details such as title, description, and cover art for a personalized touch.
 3. **Delete Playlists:**
-   - Remove playlists you no longer need with just a few clicks.
-   - Confirmations are in place to avoid accidental deletions, ensuring your playlists are safe.
+    - Remove playlists you no longer need with just a few clicks.
+    - Confirmations are in place to avoid accidental deletions, ensuring your playlists are safe.
 4. **Seamless Spotify Integration:**
-   - Connect your Spotify account seamlessly to access your existing playlists and preferences.
-   - All changes made within Cymba reflect instantly on your Spotify account.
+    - Connect your Spotify account seamlessly to access your existing playlists and preferences.
+    - All changes made within Cymba reflect instantly on your Spotify account.
 5. **User-Friendly Interface:**
-   - Intuitive design for users of all levels, making playlist management a breeze.
-   - Responsive and easy-to-navigate interface for a delightful user experience.
+    - Intuitive design for users of all levels, making playlist management a breeze.
+    - Responsive and easy-to-navigate interface for a delightful user experience.
 6. **Smart Suggestions:**
-   - Receive intelligent track suggestions based on your listening history and playlist content.
-   - Discover new music to enhance your playlists with a diverse range of songs.
-7. **Collaborative Playlist Editing:**
-   - Invite friends to collaborate on your playlists, creating a shared music experience.
-   - Real-time updates ensure everyone sees the changes made by collaborators instantly.
+    - Receive intelligent track suggestions based on your listening history and playlist content.
+    - Discover new music to enhance your playlists with a diverse range of songs.
+7. **Collaborative Playlist Editing (Future):**
+    - Invite friends to collaborate on your playlists, creating a shared music experience.
+    - Real-time updates ensure everyone sees the changes made by collaborators instantly.
 8. **Privacy Controls:**
-   - Set privacy settings for each playlist, choosing between public, private, or shared with specific users.
-   - Maintain control over who can view and edit your playlists.
+    - Set privacy settings for each playlist, choosing between public, private, or shared with specific users.
+    - Maintain control over who can view and edit your playlists.
 
 **Security:**
 
