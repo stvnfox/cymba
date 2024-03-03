@@ -33,7 +33,7 @@ const PlaylistDetailPage = () => {
                                 className="object-cover"
                                 role="presentation"
                             />
-                            <AvatarFallback>{data.name}</AvatarFallback>
+                            <AvatarFallback />
                         </Avatar>
                         <div className="flex-grow">
                             <h1 className="text-2xl font-normal text-neutral-300">{data.name}</h1>
