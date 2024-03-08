@@ -1,7 +1,8 @@
 import { FunctionComponent } from "react"
 import { PlaylistResponse } from "@/services/playlists.service"
-import { MoreVertical, Pencil, UserRoundPlus, LucideXSquare } from "lucide-react"
+import { MoreVertical, Pencil, UserRoundPlus } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { RemovePlaylistDialog } from "./RemovePlaylistDialog"
 
 interface PlaylistMenuProps {
     playlist: PlaylistResponse
@@ -24,11 +25,8 @@ export const PlaylistMenu: FunctionComponent<PlaylistMenuProps> = ({ playlist })
                     <Pencil className="h-4 min-w-4 text-neutral-300 transition-colors hover:text-neutral-100" />
                     Edit details
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer gap-2">
-                    {/* TODO: Add Remove dialog to confirm that playlist can be removed (unfollow playlist endpoint) */}
-                    <LucideXSquare className="h-4 min-w-4 text-neutral-300 transition-colors hover:text-neutral-100" />
-                    Remove
-                </DropdownMenuItem>
+                {/* TODO: Add Remove dialog to confirm that playlist can be removed (unfollow playlist endpoint) */}
+                <RemovePlaylistDialog id={playlist.id} />
                 <DropdownMenuItem
                     disabled
                     className="gap-2"

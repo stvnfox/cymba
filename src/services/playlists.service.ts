@@ -68,6 +68,11 @@ export interface GetPlaylistByIdParams {
     token: string | undefined
 }
 
+interface RemovePlaylistParams {
+    id: string
+    token: string | undefined
+}
+
 export const PlaylistsService = {
     CreatePlaylist: async (params: CreatePlaylistParams): Promise<PlaylistResponse> => {
         const endpoint = usersEndpoint + params.userId + "/playlists"
@@ -122,5 +127,21 @@ export const PlaylistsService = {
         }
 
         return {} as AddToPlaylistResponse
+    },
+    RemovePlaylist: async (params: RemovePlaylistParams): Promise<any> => {
+        const url = playlistsEndpoint + params.id + "/followers"
+
+        if (params.token) {
+            const response = await fetch(url, {
+                method: "DELETE",
+                headers: { Authorization: "Bearer " + params.token },
+            })
+
+            if (response.status === 200) {
+                return { status: 200 }
+            } else {
+                return { status: response.status }
+            }
+        }
     },
 }

@@ -15,11 +15,7 @@ const PlaylistDetailPage = () => {
         token: session?.user.access_token,
     })
 
-    const imageUrl = data?.images[0].url ?? ""
-
-    const deletePlaylist = () => {
-        console.log(`delete playlist ${data?.id}`)
-    }
+    const imageUrl = data?.images ? data?.images[0].url : ""
 
     return (
         <>
