@@ -49,7 +49,7 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
                 imageUrl = await createBase64Image(values.image[0])
             }
 
-            const response = PlaylistsService.UpdatePlaylistDetails({
+            const response = await PlaylistsService.UpdatePlaylistDetails({
                 id: playlist.id,
                 token: session?.user.access_token,
                 name: values.title,
