@@ -34,8 +34,8 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            title: "",
-            description: "",
+            title: playlist.name ?? "",
+            description: playlist.description ?? "",
             image: undefined,
         },
     })

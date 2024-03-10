@@ -153,6 +153,7 @@ export const PlaylistsService = {
         }
     },
     UpdatePlaylistDetails: async (params: UpdatePlaylistDetailsParams): Promise<any> => {
+        // TODO: Return response
         if (params.token) {
             // Only update image when it's provided
             if (params.image) {
@@ -173,15 +174,5 @@ export const PlaylistsService = {
 
             console.log(response)
         }
-        // const url = playlistsEndpoint + params.id
-        // if (params.token) {
-        //     const response = await fetch(url, {
-        //         method: "PUT",
-        //         headers: { Authorization: "Bearer " + params.token },
-        //         body: JSON.stringify({ name: params.name, description: params.description }),
-        //     })
-        //     return createResponse(response)
-        // }
-        // return {} as AddToPlaylistResponse
     },
 }
