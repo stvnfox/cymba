@@ -73,6 +73,14 @@ interface RemovePlaylistParams {
     token: string | undefined
 }
 
+interface UpdatePlaylistDetailsParams {
+    id: string
+    token: string | undefined
+    name: string
+    description?: string
+    image?: string
+}
+
 export const PlaylistsService = {
     CreatePlaylist: async (params: CreatePlaylistParams): Promise<PlaylistResponse> => {
         const endpoint = usersEndpoint + params.userId + "/playlists"
@@ -143,5 +151,37 @@ export const PlaylistsService = {
                 return { status: response.status }
             }
         }
+    },
+    UpdatePlaylistDetails: async (params: UpdatePlaylistDetailsParams): Promise<any> => {
+        if (params.token) {
+            // Only update image when it's provided
+            if (params.image) {
+                const response = await fetch(playlistsEndpoint + params.id + "/images", {
+                    method: "PUT",
+                    headers: { Authorization: "Bearer " + params.token },
+                    body: params.image,
+                })
+
+                console.log(response)
+            }
+
+            const response = await fetch(playlistsEndpoint + params.id, {
+                method: "PUT",
+                headers: { Authorization: "Bearer " + params.token },
+                body: JSON.stringify({ name: params.name, description: params.description, public: false }),
+            })
+
+            console.log(response)
+        }
+        // const url = playlistsEndpoint + params.id
+        // if (params.token) {
+        //     const response = await fetch(url, {
+        //         method: "PUT",
+        //         headers: { Authorization: "Bearer " + params.token },
+        //         body: JSON.stringify({ name: params.name, description: params.description }),
+        //     })
+        //     return createResponse(response)
+        // }
+        // return {} as AddToPlaylistResponse
     },
 }
