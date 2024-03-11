@@ -1,3 +1,8 @@
+import { FunctionComponent } from "react"
+import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
+import { LucideXSquare } from "lucide-react"
+import { PlaylistsService } from "@/services/playlists.service"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -11,11 +16,6 @@ import {
 } from "@/components/ui/dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { useToast } from "@/components/ui/use-toast"
-import { PlaylistsService } from "@/services/playlists.service"
-import { LucideXSquare } from "lucide-react"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { FunctionComponent } from "react"
 
 interface RemovePlaylistProps {
     id: string

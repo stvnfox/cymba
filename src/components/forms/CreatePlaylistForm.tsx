@@ -86,7 +86,10 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
                                         <FormItem>
                                             <FormLabel>Description</FormLabel>
                                             <FormControl>
-                                                <Textarea {...field} />
+                                                <Textarea
+                                                    className="resize-none"
+                                                    {...field}
+                                                />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

@@ -33,3 +33,19 @@ export const createResponse = async (response: Response) => {
             throw new Error("Unknown error")
     }
 }
+
+export const createBase64Image = (file: File) => {
+    return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader()
+
+        reader.onload = () => {
+            resolve(reader.result as string)
+        }
+
+        reader.onerror = (error) => {
+            reject(error)
+        }
+
+        reader.readAsDataURL(file)
+    })
+}
