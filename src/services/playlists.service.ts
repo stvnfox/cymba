@@ -81,6 +81,11 @@ interface UpdatePlaylistDetailsParams {
     image?: string
 }
 
+interface UpdatePlaylistDetailsResponse {
+    info: string | null
+    image: string | null
+}
+
 export const PlaylistsService = {
     CreatePlaylist: async (params: CreatePlaylistParams): Promise<PlaylistResponse> => {
         const endpoint = usersEndpoint + params.userId + "/playlists"
@@ -152,8 +157,12 @@ export const PlaylistsService = {
             }
         }
     },
-    UpdatePlaylistDetails: async (params: UpdatePlaylistDetailsParams): Promise<any> => {
-        // TODO: Return response
+    UpdatePlaylistDetails: async (params: UpdatePlaylistDetailsParams): Promise<UpdatePlaylistDetailsResponse> => {
+        let responseObject: UpdatePlaylistDetailsResponse = {
+            info: null,
+            image: null,
+        }
+
         if (params.token) {
             // Only update image when it's provided
             if (params.image) {
@@ -163,7 +172,7 @@ export const PlaylistsService = {
                     body: params.image,
                 })
 
-                console.log(response)
+                response.status !== 202 ? (responseObject.image = "error") : (responseObject.image = "success")
             }
 
             const response = await fetch(playlistsEndpoint + params.id, {
@@ -172,7 +181,11 @@ export const PlaylistsService = {
                 body: JSON.stringify({ name: params.name, description: params.description, public: false }),
             })
 
-            console.log(response)
+            response.status !== 200 ? (responseObject.info = "error") : (responseObject.info = "success")
+
+            return responseObject
         }
+
+        return {} as UpdatePlaylistDetailsResponse
     },
 }

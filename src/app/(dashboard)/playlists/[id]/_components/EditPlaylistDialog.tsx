@@ -1,23 +1,29 @@
-import { FunctionComponent } from "react"
-import { useSession } from "next-auth/react"
+import { FunctionComponent, useEffect, useState } from "react"
 import { Pencil } from "lucide-react"
 import { PlaylistResponse } from "@/services/playlists.service"
-import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { UpdatePlaylistDetailsForm } from "@/components/forms/UpdatePlaylistDetailsForm"
-// import { useToast } from "@/components/ui/use-toast"
-// import { PlaylistsService } from "@/services/playlists.service"
-// import { useRouter } from "next/navigation"
 
 interface EditPlaylistProps {
     playlist: PlaylistResponse
+    submit: () => void
 }
 
-export const EditPlaylistDialog: FunctionComponent<EditPlaylistProps> = ({ playlist }) => {
+export const EditPlaylistDialog: FunctionComponent<EditPlaylistProps> = ({ playlist, submit }) => {
+    const [open, setOpen] = useState(false)
+
+    const closeDialogsOnSubmit = () => {
+        setOpen(false)
+        submit()
+    }
+
     return (
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            <Dialog>
+            <Dialog
+                open={open}
+                onOpenChange={setOpen}
+            >
                 <DialogTrigger className="flex w-full items-center gap-2">
                     <Pencil className="h-4 min-w-4 text-neutral-300 transition-colors hover:text-neutral-100" />
                     Edit details
@@ -26,7 +32,10 @@ export const EditPlaylistDialog: FunctionComponent<EditPlaylistProps> = ({ playl
                     <DialogHeader>
                         <DialogTitle>Edit playlist details</DialogTitle>
                     </DialogHeader>
-                    <UpdatePlaylistDetailsForm playlist={playlist} />
+                    <UpdatePlaylistDetailsForm
+                        playlist={playlist}
+                        submit={closeDialogsOnSubmit}
+                    />
                 </DialogContent>
             </Dialog>
         </DropdownMenuItem>

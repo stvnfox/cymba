@@ -15,6 +15,7 @@ import { Spinner } from "../ui/spinner"
 
 interface UpdatePlaylistDetailsFormProps {
     playlist: PlaylistResponse
+    submit: () => void
 }
 
 const FormSchema = z.object({
@@ -29,7 +30,7 @@ const FormSchema = z.object({
     image: z.instanceof(FileList),
 })
 
-export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsFormProps> = ({ playlist }) => {
+export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsFormProps> = ({ playlist, submit }) => {
     const { data: session } = useSession()
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -57,7 +58,22 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
                 image: imageUrl.replace("data:image/jpeg;base64,", ""),
             })
 
-            console.log(response)
+            // Check if there is no image and the response for info call is successful
+            if (!response.image && response.info === "success") {
+                submit()
+                return
+            }
+
+            // Check if there is an image and the response for image and info call is successful
+            if (values.image.length > 0 && response.image === "success" && response.info === "success") {
+                submit()
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Uh oh! Something went wrong.",
+                    description: "There was a problem updating the playlist. Try it again.",
+                })
+            }
         },
     })
 
@@ -67,7 +83,6 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
 
     return (
         // TODO: Fix weird space bug..
-        // TODO: Add toast when update succeded or failed
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
