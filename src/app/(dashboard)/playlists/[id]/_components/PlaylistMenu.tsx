@@ -1,6 +1,7 @@
-import { FunctionComponent, useState } from "react"
-import { PlaylistResponse } from "@/services/playlists.service"
+import { FunctionComponent, useMemo, useState } from "react"
+import { useSession } from "next-auth/react"
 import { MoreVertical, UserRoundPlus } from "lucide-react"
+import { PlaylistResponse } from "@/services/playlists.service"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { EditPlaylistDialog } from "./EditPlaylistDialog"
 import { RemovePlaylistDialog } from "./RemovePlaylistDialog"
@@ -11,6 +12,9 @@ interface PlaylistMenuProps {
 
 export const PlaylistMenu: FunctionComponent<PlaylistMenuProps> = ({ playlist }) => {
     const [open, setOpen] = useState(false)
+    const {data: session} = useSession()
+
+    const isOwner = useMemo(() => playlist.owner.id === session?.user.id, [playlist.owner.id, session?.user.id])
 
     return (
         <DropdownMenu
@@ -26,10 +30,13 @@ export const PlaylistMenu: FunctionComponent<PlaylistMenuProps> = ({ playlist })
                 sideOffset={-8}
                 className="w-56"
             >
-                <EditPlaylistDialog
-                    playlist={playlist}
-                    submit={() => setOpen(false)}
-                />
+                {
+                    isOwner &&
+                    <EditPlaylistDialog
+                        playlist={playlist}
+                        submit={() => setOpen(false)}
+                    />
+                }
                 <RemovePlaylistDialog id={playlist.id} />
                 <DropdownMenuItem
                     disabled
