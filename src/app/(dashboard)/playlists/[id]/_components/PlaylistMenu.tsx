@@ -12,7 +12,7 @@ interface PlaylistMenuProps {
 
 export const PlaylistMenu: FunctionComponent<PlaylistMenuProps> = ({ playlist }) => {
     const [open, setOpen] = useState(false)
-    const {data: session} = useSession()
+    const { data: session } = useSession()
 
     const isOwner = useMemo(() => playlist.owner.id === session?.user.id, [playlist.owner.id, session?.user.id])
 
@@ -30,13 +30,12 @@ export const PlaylistMenu: FunctionComponent<PlaylistMenuProps> = ({ playlist })
                 sideOffset={-8}
                 className="w-56"
             >
-                {
-                    isOwner &&
+                {isOwner && (
                     <EditPlaylistDialog
                         playlist={playlist}
                         submit={() => setOpen(false)}
                     />
-                }
+                )}
                 <RemovePlaylistDialog id={playlist.id} />
                 <DropdownMenuItem
                     disabled
