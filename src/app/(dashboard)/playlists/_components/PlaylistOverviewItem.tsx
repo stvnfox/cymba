@@ -19,7 +19,7 @@ export const PlaylistOverviewItem: FunctionComponent<PlaylistOverviewItemProps> 
             >
                 <CardHeader>
                     <Image
-                        src={item.images[0] ? item.images[0].url : "/images/default-playlist-image.svg"}
+                        src={item.images ? item.images[0].url : "/images/default-playlist-image.svg"}
                         alt={item.name}
                         width={160}
                         height={160}
@@ -28,7 +28,7 @@ export const PlaylistOverviewItem: FunctionComponent<PlaylistOverviewItemProps> 
                         blurDataURL="/images/default-playlist-image.svg"
                         className={clsx(
                             "aspect-square h-full w-full rounded-lg object-cover",
-                            !item.images[0] && "bg-white"
+                            !item.images && "bg-white"
                         )}
                     />
                 </CardHeader>
