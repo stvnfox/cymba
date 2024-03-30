@@ -1,9 +1,9 @@
 "use client"
 
+import clsx from "clsx"
 import { useParams } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { usePlaylist } from "@/hooks/playlist.hook"
-import { XCircle } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { PlaylistMenu } from "./_components/PlaylistMenu"
 import { useEffect } from "react"
@@ -16,7 +16,7 @@ const PlaylistDetailPage = () => {
         token: session?.user.access_token,
     })
 
-    const imageUrl = data?.images ? data?.images[0].url : ""
+    const imageUrl = data?.images ? data?.images[0].url : "/images/default-playlist-image.svg"
 
     // TODO: Update details when playlist details are updated
     useEffect(() => {
@@ -32,7 +32,7 @@ const PlaylistDetailPage = () => {
                             <AvatarImage
                                 src={imageUrl}
                                 alt=""
-                                className="object-cover"
+                                className={clsx("object-cover", !data.images && "bg-white")}
                                 role="presentation"
                             />
                             <AvatarFallback />
