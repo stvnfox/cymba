@@ -82,7 +82,6 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
     }
 
     return (
-        // TODO: Fix weird space bug..
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
