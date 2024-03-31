@@ -78,12 +78,6 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
             }
         },
         onSuccess: async (data) => {
-            client.setQueryData(["playlist"], {
-                ...playlist,
-                name: data?.name,
-                description: data?.description,
-            })
-
             if (data?.image === "success") {
                 const imageUrl = await getUpdatedImageUrl()
 
@@ -92,6 +86,12 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
                     images: [{ url: imageUrl }],
                 })
             }
+
+            client.setQueryData(["playlist"], {
+                ...playlist,
+                name: data?.name,
+                description: data?.description,
+            })
         },
     })
 
