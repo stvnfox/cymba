@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react"
 import { usePlaylist } from "@/hooks/playlist.hook"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { PlaylistMenu } from "./_components/PlaylistMenu"
-import { useEffect } from "react"
 
 const PlaylistDetailPage = () => {
     const params = useParams()
@@ -17,11 +16,6 @@ const PlaylistDetailPage = () => {
     })
 
     const imageUrl = data?.images ? data?.images[0].url : "/images/default-playlist-image.svg"
-
-    // TODO: Update details when playlist details are updated
-    useEffect(() => {
-        console.log(data)
-    }, [data])
 
     return (
         <>

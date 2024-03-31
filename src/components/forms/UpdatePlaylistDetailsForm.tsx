@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useSession } from "next-auth/react"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createBase64Image } from "@/lib/utils"
 import { PlaylistResponse, PlaylistsService } from "@/services/playlists.service"
 import { Button } from "@/components/ui/button"
@@ -43,6 +43,7 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
 
     const fileRef = form.register("image")
 
+    const client = useQueryClient()
     const updatePlaylist = useMutation({
         mutationFn: async (values: z.infer<typeof FormSchema>) => {
             let imageUrl = ""
@@ -61,12 +62,13 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
             // Check if there is no image and the response for info call is successful
             if (!response.image && response.info === "success") {
                 submit()
-                return
+                return response
             }
 
             // Check if there is an image and the response for image and info call is successful
             if (values.image.length > 0 && response.image === "success" && response.info === "success") {
                 submit()
+                return response
             } else {
                 toast({
                     variant: "destructive",
@@ -75,7 +77,32 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
                 })
             }
         },
+        onSuccess: async (data) => {
+            client.setQueryData(["playlist"], {
+                ...playlist,
+                name: data?.name,
+                description: data?.description,
+            })
+
+            if (data?.image === "success") {
+                const imageUrl = await getUpdatedImageUrl()
+
+                client.setQueryData(["playlist"], {
+                    ...playlist,
+                    images: [{ url: imageUrl }],
+                })
+            }
+        },
     })
+
+    const getUpdatedImageUrl = async () => {
+        const response = await PlaylistsService.GetPlaylistImage({
+            id: playlist.id,
+            token: session?.user.access_token,
+        })
+
+        return response
+    }
 
     const onSubmit = (values: z.infer<typeof FormSchema>) => {
         updatePlaylist.mutate(values)
