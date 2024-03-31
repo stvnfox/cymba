@@ -79,19 +79,21 @@ export const UpdatePlaylistDetailsForm: FunctionComponent<UpdatePlaylistDetailsF
         },
         onSuccess: async (data) => {
             if (data?.image === "success") {
-                const imageUrl = await getUpdatedImageUrl()
+                const url = await getUpdatedImageUrl()
 
                 client.setQueryData(["playlist"], {
                     ...playlist,
-                    images: [{ url: imageUrl }],
+                    name: data?.name,
+                    description: data?.description,
+                    images: [{ url: url }],
+                })
+            } else {
+                client.setQueryData(["playlist"], {
+                    ...playlist,
+                    name: data?.name,
+                    description: data?.description,
                 })
             }
-
-            client.setQueryData(["playlist"], {
-                ...playlist,
-                name: data?.name,
-                description: data?.description,
-            })
         },
     })
 
