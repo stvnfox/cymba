@@ -16,12 +16,6 @@ export const navigationItems = [
         alt: "Click here to go to the dashboard",
     },
     {
-        name: "Playlists",
-        path: "/playlists",
-        icon: faCirclePlay,
-        alt: "Click here to go to your playlists",
-    },
-    {
         name: "Profile",
         path: "/profile",
         icon: faUser,

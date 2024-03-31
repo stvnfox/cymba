@@ -14,7 +14,7 @@ export const PlaylistOverviewItem: FunctionComponent<PlaylistOverviewItemProps> 
     return (
         <Card className="h-full">
             <Link
-                href={`playlists/${item.id}`}
+                href={`dashboard/${item.id}`}
                 aria-label={`Click here to see all details for the playlist: ${item.name}`}
             >
                 <CardHeader>

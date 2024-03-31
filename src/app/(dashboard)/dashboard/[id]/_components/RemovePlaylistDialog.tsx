@@ -26,7 +26,7 @@ export const RemovePlaylistDialog: FunctionComponent<RemovePlaylistProps> = ({ i
         const response = await PlaylistsService.RemovePlaylist({ id, token: data?.user.access_token })
 
         if (response.status === 200) {
-            router.push("/playlists")
+            router.push("/dashboard")
         } else {
             toast({
                 variant: "destructive",

@@ -45,7 +45,7 @@ export const CreatePlaylistForm: FunctionComponent<CreatePlaylistFormProps> = ({
             })
 
             if (response.id) {
-                router.push(`/playlists/${response.id}`)
+                router.push(`/dashboard/${response.id}`)
             }
         },
     })
