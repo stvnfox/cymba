@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react"
 import { useSession } from "next-auth/react"
+import { Grip, MenuIcon } from "lucide-react"
 import { usePlaylistsForPage } from "@/hooks/playlists.hook"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -31,8 +32,12 @@ const Home = () => {
                 <div className="mb-6 mt-1 flex items-center justify-between">
                     <h1 className="text-2xl font-normal text-neutral-300">Dashboard</h1>
                     <TabsList>
-                        <TabsTrigger value="table">Table</TabsTrigger>
-                        <TabsTrigger value="grid">Grid</TabsTrigger>
+                        <TabsTrigger value="table">
+                            <MenuIcon className="h-5 min-w-5 text-neutral-200 transition-colors group-hover:text-neutral-100" />
+                        </TabsTrigger>
+                        <TabsTrigger value="grid">
+                            <Grip className="h-5 min-w-5 text-neutral-200 transition-colors group-hover:text-neutral-100" />
+                        </TabsTrigger>
                     </TabsList>
                 </div>
                 <TabsContent value="table">Make changes to your account here.</TabsContent>
