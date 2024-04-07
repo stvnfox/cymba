@@ -6,11 +6,11 @@ import { clsx } from "clsx"
 import { SpotifyPlaylist } from "@/models/spotify.base.models"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-type PlaylistOverviewItemProps = {
+type GridOverviewItemProps = {
     item: SpotifyPlaylist
 }
 
-export const PlaylistOverviewItem: FunctionComponent<PlaylistOverviewItemProps> = ({ item }) => {
+export const GridOverviewItem: FunctionComponent<GridOverviewItemProps> = ({ item }) => {
     return (
         <Card className="h-full">
             <Link

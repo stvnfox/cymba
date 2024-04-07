@@ -1,15 +1,15 @@
 import { FunctionComponent } from "react"
 import { SpotifyPlaylist } from "@/models/spotify.base.models"
-import { PlaylistOverviewItem } from "./PlaylistOverviewItem"
+import { GridOverviewItem } from "./GridOverviewItem"
 import { MessageComponent } from "@/components/MessageComponent"
 import { CreatePlaylistButton } from "@/components/CreatePlaylistButton"
 
-type PlaylistsOverviewProps = {
+type GridOverviewProps = {
     items: SpotifyPlaylist[]
     children: React.ReactNode
 }
 
-export const PlaylistsOverview: FunctionComponent<PlaylistsOverviewProps> = ({ items, children }) => {
+export const GridOverview: FunctionComponent<GridOverviewProps> = ({ items, children }) => {
     return (
         <>
             {!items && (
@@ -28,7 +28,7 @@ export const PlaylistsOverview: FunctionComponent<PlaylistsOverviewProps> = ({ i
                                     key={item.id}
                                     className="h-full w-[200px]"
                                 >
-                                    <PlaylistOverviewItem item={item} />
+                                    <GridOverviewItem item={item} />
                                 </li>
                             )
                         })}
