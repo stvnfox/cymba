@@ -88,8 +88,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.6.0)(react@18.3.1)
       '@tanstack/eslint-plugin-query':
-        specifier: ^5.56.1
-        version: 5.56.1(eslint@8.57.1)(typescript@5.6.2)
+        specifier: ^5.57.1
+        version: 5.57.1(eslint@8.57.1)(typescript@5.6.2)
       '@tanstack/react-query-devtools':
         specifier: ^5.56.2
         version: 5.56.2(@tanstack/react-query@5.56.2(react@18.3.1))(react@18.3.1)
@@ -787,8 +787,8 @@ packages:
   '@swc/helpers@0.5.2':
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
 
-  '@tanstack/eslint-plugin-query@5.56.1':
-    resolution: {integrity: sha512-IUm2Zy5BXOqMbaa7QwNg3cPa5NP5Rm3pIFCFpe7Y3pLC7Ftp8Q0Y8GU2uNpCbMFW79jHJXdQ4Oxnu1eTQr8GXQ==}
+  '@tanstack/eslint-plugin-query@5.57.1':
+    resolution: {integrity: sha512-HrfX4NqVseUZiRFBEOjS61bYIU5Qb9TeLEraOj0yMruCFIXz4reP62Cpq6BwZfMMASV7GfWAFiRvMbg7J/U05Q==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
@@ -1172,8 +1172,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.26:
-    resolution: {integrity: sha512-Z+OMe9M/V6Ep9n/52+b7lkvYEps26z4Yz3vjWL1V61W0q+VLF1pOHhMY17sa4roz4AWmULSI8E6SAojZA5L0YQ==}
+  electron-to-chromium@1.5.27:
+    resolution: {integrity: sha512-o37j1vZqCoEgBuWWXLHQgTN/KDKe7zwpiY5CPeq2RvUqOyJw9xnrULzZAEVQ5p4h+zjMk7hgtOoPdnLxr7m/jw==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -3091,7 +3091,7 @@ snapshots:
     dependencies:
       tslib: 2.7.0
 
-  '@tanstack/eslint-plugin-query@5.56.1(eslint@8.57.1)(typescript@5.6.2)':
+  '@tanstack/eslint-plugin-query@5.57.1(eslint@8.57.1)(typescript@5.6.2)':
     dependencies:
       '@typescript-eslint/utils': 8.6.0(eslint@8.57.1)(typescript@5.6.2)
       eslint: 8.57.1
@@ -3367,7 +3367,7 @@ snapshots:
   browserslist@4.23.3:
     dependencies:
       caniuse-lite: 1.0.30001662
-      electron-to-chromium: 1.5.26
+      electron-to-chromium: 1.5.27
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
 
@@ -3529,7 +3529,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.26: {}
+  electron-to-chromium@1.5.27: {}
 
   emoji-regex@8.0.0: {}
 
