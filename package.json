@@ -18,7 +18,7 @@
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
-    "@tanstack/react-query": "^5.62.2",
+    "@tanstack/react-query": "^5.62.7",
     "class-variance-authority": "^0.7.1",
     "cmdk": "^0.2.1",
     "lucide-react": "^0.312.0",
@@ -26,10 +26,10 @@
     "next-auth": "5.0.0-beta.5",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
-    "react-hook-form": "^7.53.2",
+    "react-hook-form": "^7.54.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
@@ -38,8 +38,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@tanstack/eslint-plugin-query": "^5.62.1",
-    "@tanstack/react-query-devtools": "^5.62.2",
-    "@types/node": "^20.17.9",
+    "@tanstack/react-query-devtools": "^5.62.7",
+    "@types/node": "^20.17.10",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@uidotdev/usehooks": "^2.4.1",
